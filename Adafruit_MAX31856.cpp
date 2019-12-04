@@ -161,12 +161,23 @@ void Adafruit_MAX31856::setColdJunctionFaultThreshholds(int8_t low, int8_t high)
 void Adafruit_MAX31856::setNoiseFilter(max31856_noise_filter_t noiseFilter) {
   uint8_t t = readRegister8(MAX31856_CR0_REG);
   if(noiseFilter == MAX31856_NOISE_FILTER_50HZ) {
-    t|=0x01;
+    t|=0x01u;
   } else {
-    t&=0xfe;
+    t&=0xfeu;
   }
   writeRegister8(MAX31856_CR0_REG, t);
 }
+
+
+max31856_noise_filter_t Adafruit_MAX31856::getNoiseFilter() {
+    uint8_t t = readRegister8(MAX31856_CR0_REG);
+    if (t & 0x01u) {
+        return MAX31856_NOISE_FILTER_50HZ;
+    } else {
+        return MAX31856_NOISE_FILTER_60HZ;
+    }
+}
+
 
 /**************************************************************************/
 /*!

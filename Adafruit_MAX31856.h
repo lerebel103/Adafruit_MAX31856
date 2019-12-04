@@ -107,7 +107,9 @@ class Adafruit_MAX31856 {
 
   void setTempFaultThreshholds(float flow, float fhigh);
   void setColdJunctionFaultThreshholds(int8_t low, int8_t high);
+
   void setNoiseFilter(max31856_noise_filter_t noiseFilter);
+  max31856_noise_filter_t getNoiseFilter();
 
  private:
   int8_t _sclk, _miso, _mosi, _cs;
